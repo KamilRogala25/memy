@@ -13,7 +13,7 @@ public class Gif {
     private String name;
 
     public String getFilePath(){
-        return "/gifs" + name + ".gif";
+        return "/gifs/" + name + ".gif";
     }
     public static List<Gif> GIFS = new ArrayList<>();
     static {
