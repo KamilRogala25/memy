@@ -25,4 +25,11 @@ public class HomeController {
         return "gif-details";
     }
 
+    @GetMapping("/favorites")
+    public String getFavorites(ModelMap map){
+        map.put("favorites", Gif.GIFS.stream().filter(g -> g.isFavorite()).findAny().get());
+        return "favorites";
+    }
+
+
 }
