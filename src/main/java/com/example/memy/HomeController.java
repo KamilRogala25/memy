@@ -33,6 +33,11 @@ public class HomeController {
         map.put("gifs", Gif.GIFS.stream().filter(g -> g.isFavorite()).collect(Collectors.toList()));
         return "favorites";
     }
+    @GetMapping("/categories")
+    public String getCategories(ModelMap map){
+        map.put("categories", Category.categoryList);
+        return "categories";
+    }
 
 
 }
