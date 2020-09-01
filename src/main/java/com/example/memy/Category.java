@@ -12,7 +12,7 @@ public class Category {
 
     private String name;
 
-    public static List<Category> categoryList = new ArrayList<>();
+    public static java.util.List<Category> categoryList = new ArrayList<>();
 
     static {
         categoryList.add(new Category("bot"));

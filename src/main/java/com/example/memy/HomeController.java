@@ -6,7 +6,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Controller
@@ -29,14 +28,22 @@ public class HomeController {
     }
 
     @GetMapping("/favorites")
-    public String getFavorites(ModelMap map){
+    public String getFavorites(ModelMap map) {
         map.put("gifs", Gif.GIFS.stream().filter(g -> g.isFavorite()).collect(Collectors.toList()));
         return "favorites";
     }
+
     @GetMapping("/categories")
-    public String getCategories(ModelMap map){
+    public String getCategories(ModelMap map) {
         map.put("categories", Category.categoryList);
         return "categories";
+    }
+
+    @GetMapping("/category/{name}")
+    public String getGifFromCategory(@PathVariable String name, ModelMap map) {
+        map.put("category", Category.categoryList.stream().filter(category -> category.getName().equals(name)).findFirst().get());
+        map.put("gifs", Gif.GIFS.stream().filter(gif -> gif.getCategory().getName().equals(name)).collect(Collectors.toList()));
+        return "category";
     }
 
 
