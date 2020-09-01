@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.stream.Collectors;
 
@@ -44,6 +45,14 @@ public class HomeController {
         map.put("category", Category.categoryList.stream().filter(category -> category.getName().equals(name)).findFirst().get());
         map.put("gifs", Gif.GIFS.stream().filter(gif -> gif.getCategory().getName().equals(name)).collect(Collectors.toList()));
         return "category";
+    }
+
+    // @RequestParam oznacza że parametr będzie wysłany do adresu url
+    // /gifs/search?name=ben
+    @GetMapping("/gifs/search")
+    public String serachGifs(@RequestParam String name, ModelMap map){
+        map.put("gifs", Gif.GIFS.stream().filter(gif -> gif.getName().contains(name)).collect(Collectors.toList()));
+    return "home";
     }
 
 
