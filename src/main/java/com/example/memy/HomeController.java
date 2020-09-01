@@ -6,6 +6,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
 @Controller
 public class HomeController {
 
@@ -27,7 +30,7 @@ public class HomeController {
 
     @GetMapping("/favorites")
     public String getFavorites(ModelMap map){
-        map.put("favorites", Gif.GIFS.stream().filter(g -> g.isFavorite()).findAny().get());
+        map.put("gifs", Gif.GIFS.stream().filter(g -> g.isFavorite()).collect(Collectors.toList()));
         return "favorites";
     }
 
